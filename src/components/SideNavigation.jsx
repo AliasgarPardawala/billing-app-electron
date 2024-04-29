@@ -11,22 +11,22 @@ export const SideNavigation = () => {
         {
             img: invoice,
             name: "Invoice",
-            path: "/invoices"
+            path: "/billing-app-electron/invoices"
         },
         {
             img: invoice,
             name: "Quotation",
-            path: "/quotations"
+            path: "/billing-app-electron/quotations"
         },
         {
             img: invoice,
             name: "Purchase",
-            path: "/purchases"
+            path: "/billing-app-electron/purchases"
         },
         {
             img: customer,
             name: "Company",
-            path: "/companies"
+            path: "/billing-app-electron/companies"
         },
     ]
 

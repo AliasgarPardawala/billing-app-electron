@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "main": "src/electron.js",
+  "homepage": "./",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -41,7 +42,7 @@
     "extends": null,
     "directories": {
       "buildResources": "buildResources",
-      "output": "dist"
+      "output": "build"
     }
   }
 }

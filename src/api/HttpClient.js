@@ -49,7 +49,7 @@ export default class HttpClient {
         if (!res) {
             throw new Error("No Response");
         }
-        if (res.ok) {
+        if (res.ok || res.status === 201) {
             return res.json();
         } else {
             const errorMessage = `Api error ${res.status}`;

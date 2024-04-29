@@ -1,8 +1,5 @@
 import { app, BrowserWindow, screen } from 'electron';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import isDev from 'electron-is-dev';
-import * as url from 'url';
 
 let mainWindow;
 
@@ -22,12 +19,8 @@ function createWindow() {
     });
 
     const startURL = isDev
-        ? 'http://localhost:3000'
-        : url.format({
-            pathname: `Users/aliasgar/electron-billing-app/build/index.html`,
-            protocol: 'file:',
-            slashes: true
-        })
+        ? 'http://localhost:5173/billing-app-electron/invoices'
+        : 'https://aliasgarpardawala.github.io/billing-app-electron'
 
     mainWindow.loadURL(startURL);
     mainWindow.maximize();

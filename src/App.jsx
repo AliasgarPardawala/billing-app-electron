@@ -54,10 +54,11 @@ function App() {
                     <SideNavigation/>
                     <div style={{flexGrow: 1, background: "#fefefe"}}>
                         <Routes>
-                            <Route path={"/invoices/*"} element={<Invoice/>}/>
-                            <Route path={"/quotations/*"} element={<Quotation/>}/>
-                            <Route path={"/purchases/*"} element={<Purchase/>}/>
-                            <Route path={"/companies"} element={<CompanyListing/>}/>
+                            <Route path={"/billing-app-electron"} element={<Invoice/>}></Route>
+                            <Route path={"/billing-app-electron/invoices/*"} element={<Invoice/>}/>
+                            <Route path={"/billing-app-electron/quotations/*"} element={<Quotation/>}/>
+                            <Route path={"/billing-app-electron/purchases/*"} element={<Purchase/>}/>
+                            <Route path={"/billing-app-electron/companies"} element={<CompanyListing/>}/>
                         </Routes>
                         <Outlet/>
                     </div>
