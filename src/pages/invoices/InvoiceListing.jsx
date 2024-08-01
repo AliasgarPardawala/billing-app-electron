@@ -17,11 +17,11 @@ import {NavLink, Outlet, useNavigate} from "react-router-dom";
 import {AppContext} from "../../App.jsx";
 
 export const InvoiceListing = () => {
-    const {appState} = useContext(AppContext);
+    const {appState, setAppState} = useContext(AppContext);
 
     const invoices = appState?.invoices || []
 
-    const TABLE_HEAD = ["Company", "Invoice Date", "Amount", "Status", ""];
+    const TABLE_HEAD = ["Company", "Invoice Number" ,"Invoice Date", "Amount", "Status", "", "", ""];
 
     const navigate = useNavigate()
 
@@ -51,9 +51,9 @@ export const InvoiceListing = () => {
                     <table className="w-full min-w-max table-auto text-left">
                         <thead>
                         <tr>
-                            {TABLE_HEAD.map((head) => (
+                            {TABLE_HEAD.map((head, index) => (
                                 <th
-                                    key={head}
+                                    key={head + index}
                                     className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                                 >
                                     <Typography
@@ -91,7 +91,16 @@ export const InvoiceListing = () => {
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {invoice.invoice_date}
+                                                {invoice.invoice_number}
+                                            </Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal"
+                                            >
+                                                {new Date(invoice.invoice_date).toLocaleDateString('en-GB')}
                                             </Typography>
                                         </td>
                                         <td className={classes}>
@@ -120,10 +129,36 @@ export const InvoiceListing = () => {
                                             </div>
                                         </td>
                                         <td className={classes}>
-                                            <Tooltip content="Edit User">
+                                            <Typography
+                                                className={'text-blue-400 font-bold cursor-pointer hover:text-blue-600'}>
+                                                View
+                                            </Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <Tooltip content="Edit Invice">
                                                 <IconButton variant="text">
-                                                    <PencilIcon className="h-4 w-4"/>
+                                                    <PencilIcon
+                                                        className="h-4 w-4"
+                                                        onClick={async () => {
+                                                            const data = await appState.invoiceApi.get(invoice.invoice_id)
+                                                            navigate(`/billing-app-electron/invoices/${invoice.invoice_number}`, {state: data})
+                                                        }}/>
                                                 </IconButton>
+                                            </Tooltip>
+                                        </td>
+                                        <td className={classes}>
+                                            <Tooltip content="Delete Invice">
+                                                <Typography className={'text-red-500 font-bold cursor-pointer hover:text-red-600'} onClick={async () => {
+                                                    await appState.invoiceApi.delete(invoice.invoice_id)
+                                                    const invoices = await appState.invoiceApi.getAll();
+                                                    setAppState({
+                                                      ...appState,
+                                                      invoices: invoices
+                                                    })
+                                                }}
+                                                >
+                                                    Delete
+                                                </Typography>
                                             </Tooltip>
                                         </td>
                                     </tr>

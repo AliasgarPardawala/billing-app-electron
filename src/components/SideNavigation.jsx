@@ -34,7 +34,7 @@ export const SideNavigation = () => {
     const location = useLocation()
 
     return (
-        <Card className="h-[calc(100vh)] max-w-[15rem] shadow-xl shadow-blue-gray-900/5">
+        <Card className="min-h-[100vh] max-h-[100vh] max-w-[15rem] shadow-xl shadow-blue-gray-900/5 overflow-hidden">
             <div className="mb-2 p-4">
                 <img className={'max-w-[5rem]'} src={logo} alt={"logo"}/>
             </div>

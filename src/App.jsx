@@ -26,7 +26,7 @@ function App() {
     const purchaseApi = new PurchaseApi(apiClient)
 
 
-    const [appState, setAppState] = useState({httpClient, apiClient, companyApi})
+    const [appState, setAppState] = useState({httpClient, apiClient, companyApi, invoiceApi, purchaseApi, quotationApi})
 
 
     useEffect( () => {
@@ -50,9 +50,9 @@ function App() {
     return (
         <AppContext.Provider value={{appState, setAppState}}>
             <BrowserRouter style={{width: "100%", height: "100%"}}>
-                <div className={"flex flex-grow"}>
+                <div className={"flex flex-grow h-[100%]"}>
                     <SideNavigation/>
-                    <div style={{flexGrow: 1, background: "#fefefe"}}>
+                    <div style={{flexGrow: 1, background: "#fefefe", overflow: 'scroll'}} className={'max-h-[100vh]'}>
                         <Routes>
                             <Route path={"/billing-app-electron"} element={<Invoice/>}></Route>
                             <Route path={"/billing-app-electron/invoices/*"} element={<Invoice/>}/>

@@ -12,6 +12,7 @@ export default class InvoiceApi {
     }
 
     create = (body) => {
+        console.log("API")
         return this.apiClient.post("invoice/create", body)
     }
 

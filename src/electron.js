@@ -1,7 +1,19 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import isDev from 'electron-is-dev';
+import * as path from "path";
+import * as fs from "fs";
 
 let mainWindow;
+
+
+const HOME_PATH = path.join(app.getPath('home'), 'Billing')
+
+const getFilePath = (data) => {
+    return path.join(HOME_PATH, data.type ,data.title+'.pdf')
+}
+ipcMain.on('save-pdf', async (event, data) => {
+    fs.writeFileSync(getFilePath(data), await Buffer.from(data.document))
+})
 
 function createWindow() {
 
@@ -14,7 +26,8 @@ function createWindow() {
         minHeight: screenHeight / 2,
         show: false,
         webPreferences: {
-            nodeIntegration: true,
+            nodeIntegration: false,
+            preload:  path.join(app.getAppPath(), 'src', 'preload.js')
         },
     });
 
